@@ -14,9 +14,8 @@ RUN apk add --no-cache \
     git \
     nodejs \
     npm \
+    yarn \
     tzdata
-
-RUN corepack enable
 
 WORKDIR /app
 
