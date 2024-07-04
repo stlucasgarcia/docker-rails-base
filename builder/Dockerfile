@@ -12,10 +12,11 @@ RUN apk add --no-cache \
     sqlite-dev \
     mariadb-dev \
     git \
-    nodejs-current \
+    nodejs \
     npm \
-    yarn \
     tzdata
+
+RUN corepack enable
 
 WORKDIR /app
 
