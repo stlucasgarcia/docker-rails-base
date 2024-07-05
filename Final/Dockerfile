@@ -22,8 +22,8 @@ WORKDIR /app
 EXPOSE 3000
 
 # Allow multiple envs
-ARG RAILS_ENV="production"
-ENV RAILS_ENV=$RAILS_ENV
+ARG RAILS_ENV=production
+ENV RAILS_ENV ${RAILS_ENV}
 
 # Enable jemalloc for reduced memory usage and latency
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
