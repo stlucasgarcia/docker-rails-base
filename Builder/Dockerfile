@@ -19,9 +19,6 @@ RUN apk add --no-cache \
 
 WORKDIR /app
 
-ARG RAILS_ENV=production
-ENV RAILS_ENV ${RAILS_ENV}
-
 #### Install standard Node modules
 COPY package.json yarn.lock /app/
 # If your app uses Cypress for end-to-end testing, installing the binary can be slow, so we
@@ -78,7 +75,7 @@ ONBUILD RUN mv config/credentials config/credentials.bak 2>/dev/null || true
 ONBUILD RUN --mount=type=secret,id=npmrc,dst=/root/.npmrc \
     --mount=type=secret,id=yarnrc,dst=/root/.yarnrc.yml \
     yarn install
-ONBUILD RUN RAILS_ENV=${RAILS_ENV} \
+ONBUILD RUN RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
     RAILS_MASTER_KEY=dummy \
     bundle exec rails assets:precompile
