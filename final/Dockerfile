@@ -21,9 +21,8 @@ WORKDIR /app
 # Expose Puma port
 EXPOSE 3000
 
-# Allow multiple envs
-ARG RAILS_ENV=production
-ENV RAILS_ENV ${RAILS_ENV}
+# This image is for production env only
+ENV RAILS_ENV production
 
 # Enable jemalloc for reduced memory usage and latency
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
