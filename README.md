@@ -1,6 +1,7 @@
 [![Build images](https://github.com/stlucasgarcia/docker-rails-base/actions/workflows/ci.yml/badge.svg)](https://github.com/stlucasgarcia/docker-rails-base/actions/workflows/ci.yml)
 
 # DockerRailsBase
+> This fork includes a few minor changes. All credits to Georg Ledermann (georg@ledermann.dev).
 
 Building Docker images usually takes a long time. This repo contains base images with preinstalled dependencies for [Ruby on Rails](https://rubyonrails.org/), so building a production image will be **2-3 times faster**.
 
