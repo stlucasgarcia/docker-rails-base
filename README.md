@@ -1,4 +1,4 @@
-[![Build images](https://github.com/ledermann/docker-rails-base/actions/workflows/ci.yml/badge.svg)](https://github.com/ledermann/docker-rails-base/actions/workflows/ci.yml)
+[![Build images](https://github.com/stlucasgarcia/docker-rails-base/actions/workflows/ci.yml/badge.svg)](https://github.com/stlucasgarcia/docker-rails-base/actions/workflows/ci.yml)
 
 # DockerRailsBase
 
@@ -72,61 +72,47 @@ Using [Dependabot](https://dependabot.com/), every updated Ruby gem results in a
 Add this `Dockerfile` to your application:
 
 ```Dockerfile
-FROM ghcr.io/ledermann/rails-base-builder:3.3.3-alpine AS Builder
-FROM ghcr.io/ledermann/rails-base-final:3.3.3-alpine
-USER app
-# Optional: Enable YJIT
-# ENV RUBY_YJIT_ENABLE=1
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
-```
+FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.3-alpine AS Builder
 
-Yes, this is the complete `Dockerfile` of your Rails app. It's so simple because the work is done by ONBUILD triggers.
-
-Now build the image:
-
-```bash
-$ docker build .
-```
-
-#### Building the Docker image with BuildKit
-
-[BuildKit](https://docs.docker.com/develop/develop-images/build_enhancements/) requires a little [workaround](https://github.com/moby/buildkit/issues/816) to trigger the ONBUILD statements. Add a `COPY` statement to the `Dockerfile`:
-
-```Dockerfile
-FROM ghcr.io/ledermann/rails-base-builder:3.3.3-alpine AS Builder
-FROM ghcr.io/ledermann/rails-base-final:3.3.3-alpine
+FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.3-alpine
 
 # Workaround to trigger Builder's ONBUILDs to finish:
 COPY --from=Builder /etc/alpine-release /tmp/dummy
 
 USER app
-# Optional: Enable YJIT
-# ENV RUBY_YJIT_ENABLE=1
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+
+# Enable YJIT
+# ENV RUBY_YJIT_ENABLE=0
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["docker/docker-entrypoint.sh"]
+
+# Start the Rails app
+CMD ["./bin/rails", "server"]
 ```
 
 Now you can build the image with BuildKit:
 
 ```
-docker buildx build .
+docker build .
 ```
 
 You can use private npm/Yarn packages by mounting the config file:
 
 ```
-docker buildx build --secret id=npmrc,src=$HOME/.npmrc .
+docker build --secret id=npmrc,src=$HOME/.npmrc .
 ```
 
 or
 
 ```
-docker buildx build --secret id=yarnrc,src=$HOME/.yarnrc.yml .
+docker build --secret id=yarnrc,src=$HOME/.yarnrc.yml .
 ```
 
 In a similar way you can provide a configuration file for Bundler:
 
 ```
-docker buildx build --secret id=bundleconfig,src=$HOME/.bundle/config .
+docker build --secret id=bundleconfig,src=$HOME/.bundle/config .
 ```
 
 #### Continuous integration (CI)
@@ -169,8 +155,8 @@ deploy:
 
 Both Docker images (`Builder` and `Final`) are regularly published at ghcr.io and tagged with the current Ruby version:
 
-- https://github.com/ledermann/docker-rails-base/pkgs/container/rails-base-builder
-- https://github.com/ledermann/docker-rails-base/pkgs/container/rails-base-final
+- https://github.com/stlucasgarcia/docker-rails-base/pkgs/container/rails-base-builder
+- https://github.com/stlucasgarcia/docker-rails-base/pkgs/container/rails-base-final
 
 Beware: The published images are **not** immutable. When a dependency (e.g. Ruby gem) is updated, the images will be republished using the **same** tag.
 
