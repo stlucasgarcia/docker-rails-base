@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1
 FROM ruby:3.3.3-alpine
-LABEL maintainer="georg@ledermann.dev"
+LABEL maintainer="lucas@stlucasgarcia.com"
 
 # Add basic packages
 RUN apk add --no-cache \
