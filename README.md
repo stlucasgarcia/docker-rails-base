@@ -30,7 +30,7 @@ This repo is based on the following assumptions:
 
 - Your Docker host is compatible with [Alpine Linux 3.20](https://www.alpinelinux.org/posts/Alpine-3.20.0-released.html), which requires Docker 20.10.0 or later
 - Your app is compatible with [Ruby 3.3 for Alpine Linux](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
-- Your app uses Ruby on Rails 6.0, 6.1, 7.0 or 7.1
+- Your app uses Ruby on Rails 7.1
 - Your app uses PostgreSQL, SQLite or MySQL/MariaDB
 - Your app installs Node modules with [Yarn](https://yarnpkg.com/)
 - Your app bundles JavaScript with `rails assets:precompile`. This works with [Vite Ruby](https://github.com/ElMassimo/vite_ruby), [Webpacker](https://github.com/rails/webpacker), [Asset pipeline (Sprockets)](https://github.com/rails/sprockets-rails) and others.
@@ -47,7 +47,7 @@ The `Builder` stage installs Ruby gems and Node modules. It also includes Git, N
 
 - Based on [ruby:3.3.3-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
 - Adds packages needed for installing gems and compiling assets: Git, Node.js, Yarn, PostgreSQL client and build tools
-- Adds some default Ruby gems (Rails 7.0 etc., see [Gemfile](./Builder/Gemfile))
+- Adds some default Ruby gems (Rails 7.1 etc., see [Gemfile](./Builder/Gemfile))
 - Via ONBUILD triggers it installs missing gems and Node modules, then compiles the assets
 
 See [Builder/Dockerfile](./Builder/Dockerfile)
@@ -146,7 +146,7 @@ deploy:
         export COMMIT_SHA=${GITHUB_SHA}
         export COMMIT_VERSION=$(git describe)
         export COMMIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-        docker buildx build --build-arg COMMIT_TIME --build-arg COMMIT_SHA --build-arg COMMIT_VERSION --build-arg COMMIT_BRANCH -t ghcr.io/user/repo:latest .
+        docker build --build-arg COMMIT_TIME --build-arg COMMIT_SHA --build-arg COMMIT_VERSION --build-arg COMMIT_BRANCH -t ghcr.io/user/repo:latest .
 
     - name: Push the image
       run: docker push ghcr.io/user/repo:latest
@@ -165,25 +165,7 @@ When a new Ruby version comes out, a new tag is introduced and the images will b
 
 | Ruby version | Tag          | First published |
 | ------------ | ------------ | --------------- |
-| 3.3.3        | 3.3.3-alpine | 2024-06-13      |
-| 3.3.2        | 3.3.2-alpine | 2024-05-31      |
-| 3.3.1        | 3.3.1-alpine | 2024-04-23      |
-| 3.3.0        | 3.3.0-alpine | 2023-12-27      |
-| 3.2.2        | 3.2.2-alpine | 2023-03-31      |
-| 3.2.1        | 3.2.1-alpine | 2023-02-10      |
-| 3.2.0        | 3.2.0-alpine | 2023-01-13      |
-| 3.1.3        | 3.1.3-alpine | 2022-11-26      |
-| 3.1.2        | 3.1.2-alpine | 2022-04-13      |
-| 3.1.1        | 3.1.1-alpine | 2022-02-19      |
-| 3.1.0        | 3.1.0-alpine | 2022-01-08      |
-| 3.0.3        | 3.0.3-alpine | 2021-11-24      |
-| 3.0.2        | 3.0.2-alpine | 2021-07-08      |
-| 3.0.1        | 3.0.1-alpine | 2021-04-06      |
-| 3.0.0        | 3.0.0-alpine | 2021-02-15      |
-| 2.7.2        | 2.7.2-alpine | 2020-10-10      |
-| 2.7.1        | 2.7.1-alpine | 2020-05-20      |
-| 2.6.6        | -            | 2020-04-01      |
-| 2.6.5        | -            | 2020-01-24      |
+| 3.3.3        | 3.3.3-alpine | 2024-07-05      |
 
 The latest Docker images are also tagged as `latest`. However, it is not recommended to use this tag in your Rails application, because updating an app to a new Ruby version usually requires some extra work.
 
