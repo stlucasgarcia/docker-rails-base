@@ -86,3 +86,9 @@ gem 'friendly_id'
 
 # SSL/TLS and general-purpose cryptography for Ruby (https://github.com/ruby/openssl)
 gem 'openssl'
+
+# Resend mailer for sending emails (https://github.com/resend/resend-ruby)
+gem 'resend'
+
+# Active Job Backend, alternative to sidekiq (https://github.com/bensheldon/good_job)
+gem 'good_job'
