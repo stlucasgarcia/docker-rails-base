@@ -120,10 +120,6 @@ GEM
       fugit (>= 1.1)
       railties (>= 6.0.0)
       thor (>= 0.14.1)
-<<<<<<< HEAD
-=======
-    honeybadger (5.15.0)
->>>>>>> 43b23c8 (Bump honeybadger from 5.14.2 to 5.15.0 in /Builder (#19))
     http-accept (1.7.0)
     http-cookie (1.0.6)
       domain_name (~> 0.5)
