@@ -39,28 +39,28 @@ If your project differs from this, I suggest to fork this project and create you
 
 ## How?
 
-It uses [multi-stage building](https://docs.docker.com/develop/develop-images/multistage-build/) to build a very small production image. There are two Dockerfiles in this repo, one for the first stage (called `Builder`) and one for the resulting stage (called `Final`).
+It uses [multi-stage building](https://docs.docker.com/develop/develop-images/multistage-build/) to build a very small production image. There are two Dockerfiles in this repo, one for the first stage (called `builder`) and one for the resulting stage (called `final`).
 
 ### Builder stage
 
-The `Builder` stage installs Ruby gems and Node modules. It also includes Git, Node.js and some build tools - all we need to compile assets.
+The `builder` stage installs Ruby gems and Node modules. It also includes Git, Node.js and some build tools - all we need to compile assets.
 
-- Based on [ruby:3.3.3-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
+- Based on [ruby:3.3.4-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
 - Adds packages needed for installing gems and compiling assets: Git, Node.js, Yarn, PostgreSQL client and build tools
 - Adds some default Ruby gems (Rails 7.1 etc., see [Gemfile](./Builder/Gemfile))
 - Via ONBUILD triggers it installs missing gems and Node modules, then compiles the assets
 
-See [Builder/Dockerfile](./Builder/Dockerfile)
+See [builder/Dockerfile](./builder/Dockerfile)
 
 ### Final stage
 
-The `Final` stage builds the production image, which includes just the bare minimum.
+The `final` stage builds the production image, which includes just the bare minimum.
 
-- Based on [ruby:3.3.3-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
+- Based on [ruby:3.3.4-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
 - Adds packages needed for production: postgresql-client, tzdata, file
-- Via ONBUILD triggers it mainly copies the app and gems from the `Builder` stage
+- Via ONBUILD triggers it mainly copies the app and gems from the `builder` stage
 
-See [Final/Dockerfile](./Final/Dockerfile)
+See [final/Dockerfile](./final/Dockerfile)
 
 ### Staying up-to-date
 
@@ -73,12 +73,12 @@ Using [Dependabot](https://dependabot.com/), every updated Ruby gem results in a
 Add this `Dockerfile` to your application:
 
 ```Dockerfile
-FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.3-alpine AS Builder
+FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.4-alpine AS Builder
 
-FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.3-alpine
+FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.4-alpine
 
-# Workaround to trigger Builder's ONBUILDs to finish:
-COPY --from=Builder /etc/alpine-release /tmp/dummy
+# Workaround to trigger builder's ONBUILDs to finish:
+COPY --from=builder /etc/alpine-release /tmp/dummy
 
 USER app
 
@@ -154,7 +154,7 @@ deploy:
 
 ## Available Docker images
 
-Both Docker images (`Builder` and `Final`) are regularly published at ghcr.io and tagged with the current Ruby version:
+Both Docker images (`builder` and `final`) are regularly published at ghcr.io and tagged with the current Ruby version:
 
 - https://github.com/stlucasgarcia/docker-rails-base/pkgs/container/rails-base-builder
 - https://github.com/stlucasgarcia/docker-rails-base/pkgs/container/rails-base-final
@@ -165,6 +165,7 @@ When a new Ruby version comes out, a new tag is introduced and the images will b
 
 | Ruby version | Tag          | First published |
 | ------------ | ------------ | --------------- |
+| 3.3.4        | 3.3.4-alpine | 2024-07-25      |
 | 3.3.3        | 3.3.3-alpine | 2024-07-05      |
 
 The latest Docker images are also tagged as `latest`. However, it is not recommended to use this tag in your Rails application, because updating an app to a new Ruby version usually requires some extra work.
