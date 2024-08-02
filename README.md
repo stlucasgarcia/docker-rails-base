@@ -73,7 +73,7 @@ Using [Dependabot](https://dependabot.com/), every updated Ruby gem results in a
 Add this `Dockerfile` to your application:
 
 ```Dockerfile
-FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.4-alpine AS Builder
+FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.4-alpine AS builder
 
 FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.4-alpine
 
