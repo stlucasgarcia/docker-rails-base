@@ -14,7 +14,7 @@ RUN apk add --no-cache \
 
 # Configure Rails
 ENV RAILS_LOG_TO_STDOUT=true
-ENV RAILS_SERVE_STATIC_FILES=true
+# ENV RAILS_SERVE_STATIC_FILES=true
 
 WORKDIR /app
 
