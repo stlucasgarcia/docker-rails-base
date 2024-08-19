@@ -6,6 +6,7 @@ LABEL maintainer="lucas@stlucasgarcia.com"
 RUN apk add --no-cache \
       jemalloc \
       xz-libs \
+      vips-dev \
       postgresql-client \
       gcompat \
       brotli-libs \
