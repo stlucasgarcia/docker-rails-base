@@ -45,7 +45,7 @@ It uses [multi-stage building](https://docs.docker.com/develop/develop-images/mu
 
 The `builder` stage installs Ruby gems and Node modules. It also includes Git, Node.js and some build tools - all we need to compile assets.
 
-- Based on [ruby:3.3.4-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
+- Based on [ruby:3.3.5-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
 - Adds packages needed for installing gems and compiling assets: Git, Node.js, Yarn, PostgreSQL client and build tools
 - Adds some default Ruby gems (Rails 7.2 etc., see [Gemfile](./builder/Gemfile))
 - Via ONBUILD triggers it installs missing gems and Node modules, then compiles the assets
@@ -56,7 +56,7 @@ See [builder/Dockerfile](./builder/Dockerfile)
 
 The `final` stage builds the production image, which includes just the bare minimum.
 
-- Based on [ruby:3.3.4-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
+- Based on [ruby:3.3.5-alpine](https://github.com/docker-library/ruby/blob/master/3.3/alpine3.20/Dockerfile)
 - Adds packages needed for production: postgresql-client, tzdata, file
 - Via ONBUILD triggers it mainly copies the app and gems from the `builder` stage
 
@@ -73,17 +73,14 @@ Using [Dependabot](https://dependabot.com/), every updated Ruby gem results in a
 Add this `Dockerfile` to your application:
 
 ```Dockerfile
-FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.4-alpine AS builder
+FROM ghcr.io/stlucasgarcia/rails-base-builder:3.3.5-alpine AS builder
 
-FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.4-alpine
+FROM ghcr.io/stlucasgarcia/rails-base-final:3.3.5-alpine
 
 # Workaround to trigger builder's ONBUILDs to finish:
 COPY --from=builder /etc/alpine-release /tmp/dummy
 
 USER app
-
-# Enable YJIT
-# ENV RUBY_YJIT_ENABLE=0
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["docker/docker-entrypoint.sh"]
@@ -165,6 +162,7 @@ When a new Ruby version comes out, a new tag is introduced and the images will b
 
 | Ruby version | Tag          | First published |
 | ------------ | ------------ | --------------- |
+| 3.3.5        | 3.3.5-alpine | 2024-09-07      |
 | 3.3.4        | 3.3.4-alpine | 2024-07-25      |
 | 3.3.3        | 3.3.3-alpine | 2024-07-05      |
 
