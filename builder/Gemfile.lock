@@ -99,6 +99,14 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    faraday (2.12.0)
+      faraday-net_http (>= 2.0, < 3.4)
+      json
+      logger
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.3.0)
+      net-http
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
@@ -117,7 +125,7 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    honeybadger (5.19.1)
+    honeybadger (5.19.2)
       logger
     http-accept (1.7.0)
     http-cookie (1.0.7)
@@ -165,6 +173,9 @@ GEM
     msgpack (1.7.3)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    multipart-post (2.4.1)
+    net-http (0.4.1)
+      uri
     net-imap (0.5.0)
       date
       net-protocol
@@ -291,6 +302,15 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
+    solid_cable (3.0.2)
+      actioncable (>= 7.2)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
+    solid_cache (1.0.6)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -310,12 +330,13 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.1)
     useragent (0.16.10)
     view_component (3.20.0)
       activesupport (>= 5.2.0, < 8.1)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
-    vite_rails (3.0.18)
+    vite_rails (3.0.19)
       railties (>= 5.1, < 9)
       vite_ruby (~> 3.0, >= 3.2.2)
     vite_ruby (3.9.0)
@@ -333,12 +354,15 @@ GEM
 PLATFORMS
   aarch64-linux-musl
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
   bootsnap
   devise
+  faraday
+  faraday-multipart
   friendly_id
   good_job
   honeybadger
@@ -362,6 +386,8 @@ DEPENDENCIES
   sass-rails (>= 6)
   sidekiq
   slim-rails
+  solid_cable
+  solid_cache
   sprockets-rails
   stimulus-rails
   turbo-rails
@@ -369,7 +395,7 @@ DEPENDENCIES
   vite_rails
 
 RUBY VERSION
-   ruby 3.3.5p100
+   ruby 3.3.6p108
 
 BUNDLED WITH
    2.5.22
