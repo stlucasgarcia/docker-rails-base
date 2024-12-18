@@ -264,7 +264,7 @@ GEM
     redcarpet (3.6.0)
     redis-client (0.23.0)
       connection_pool
-    reline (0.5.12)
+    reline (0.6.0)
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
@@ -304,7 +304,7 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
-    solid_cable (3.0.4)
+    solid_cable (3.0.5)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
