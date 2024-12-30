@@ -1,28 +1,28 @@
 # syntax = docker/dockerfile:1
-FROM ruby:3.3.6-alpine3.20
+FROM ruby:3.4.1-alpine
 LABEL maintainer="lucas@stlucasgarcia.com"
 
 # Add basic packages
 RUN apk add --no-cache \
     build-base \
     gcompat \
-    vips-dev \
-    imagemagick-dev \
-    postgresql-dev \
-    sqlite-dev \
-    mariadb-dev \
     git \
+    imagemagick-dev \
+    mariadb-dev \
     nodejs \
     npm \
-    yarn \
-    tzdata
+    postgresql-dev \
+    sqlite-dev \
+    tzdata \
+    vips-dev \
+    yarn
 
 WORKDIR /app
 
 #### Install standard Node modules
 COPY package.json yarn.lock /app/
 # If your app uses Cypress for end-to-end testing, installing the binary can be slow, so we
-# explicitely exclude it from installing (because tests are not run here)
+# explicitly exclude it from installing (because tests are not run here)
 ENV CYPRESS_INSTALL_BINARY=0
 # Avoid error "digital envelope routines::initialization error" while compiling assets with Webpack
 # due to OpenSSL 3.0 (included in Alpine 3.17+)

@@ -1,17 +1,17 @@
 # syntax = docker/dockerfile:1
-FROM ruby:3.3.6-alpine3.20
+FROM ruby:3.4.1-alpine
 LABEL maintainer="lucas@stlucasgarcia.com"
 
 # Add basic packages
 RUN apk add --no-cache \
+      brotli-libs \
+      file \
+      gcompat \
       jemalloc \
-      xz-libs \
       vips-dev \
       postgresql-client \
-      gcompat \
-      brotli-libs \
       tzdata \
-      file
+      xz-libs
 
 # Configure Rails
 ENV RAILS_LOG_TO_STDOUT=true

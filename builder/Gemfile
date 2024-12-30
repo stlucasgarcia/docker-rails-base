@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.6'
+ruby '3.4.1'
 
 # Full-stack web application framework. (https://rubyonrails.org)
 gem 'rails', '~> 7.2.1'
@@ -88,7 +88,6 @@ gem 'friendly_id'
 gem 'openssl'
 
 # Resend mailer for sending emails (https://github.com/resend/resend-ruby)
-gem 'resend'
 
 # Active Job Backend, alternative to sidekiq (https://github.com/bensheldon/good_job)
 gem 'good_job'
