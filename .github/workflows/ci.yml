@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push BUILDER image
-        uses: docker/build-push-action@v6.12.0
+        uses: docker/build-push-action@v6.13.0
         with:
           context: '{{defaultContext}}:builder'
           platforms: linux/amd64,linux/arm64
@@ -50,7 +50,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Build and push FINAL image
-        uses: docker/build-push-action@v6.12.0
+        uses: docker/build-push-action@v6.13.0
         with:
           context: '{{defaultContext}}:final'
           platforms: linux/amd64,linux/arm64
