@@ -13,11 +13,11 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TAG_NAME: 3.4.1-alpine
+  TAG_NAME: 3.4.2-alpine
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Set up Docker Buildx

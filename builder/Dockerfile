@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1
-FROM ruby:3.4.1-alpine
+FROM ruby:3.4.2-alpine
 LABEL maintainer="lucas@stlucasgarcia.com"
 
 # Add basic packages
@@ -15,6 +15,7 @@ RUN apk add --no-cache \
     sqlite-dev \
     tzdata \
     vips-dev \
+    yaml-dev \
     yarn
 
 WORKDIR /app
@@ -84,7 +85,7 @@ ONBUILD RUN mv config/credentials.bak config/credentials 2>/dev/null || true
 # Remove folders not needed in resulting image
 # This includes `app/javascript` which contains the JavaScript source code.
 # Normally it is not needed in the resulting image, because it was compiled
-# to `public/`. But if the app uses importmaps, the folder is still required
+# to `public/`. But if the app uses import maps, the folder is still required
 # for pinning and must not be removed.
 ONBUILD RUN rm -rf node_modules yarn.lock .yarn .yarnrc.yml vendor/bundle test spec app/packs
 ONBUILD RUN if [ ! -f config/importmap.rb ]; then rm -rf app/javascript; fi
