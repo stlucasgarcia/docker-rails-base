@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.4.2'
 
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '~> 8.0.0'
+gem 'rails', '~> 7.2.2.1'
 
 # Sprockets Rails integration (https://github.com/rails/sprockets-rails)
 gem 'sprockets-rails'
@@ -35,6 +35,9 @@ gem 'oj'
 
 # JSON Implementation for Ruby (https://ruby.github.io/json)
 gem 'json'
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+gem 'bcrypt', '~> 3.1.7'
 
 # High-level wrapper for processing images for the web with ImageMagick or libvips. (https://github.com/janko/image_processing)
 gem 'image_processing', '~> 1.2'
@@ -88,7 +91,7 @@ gem 'friendly_id'
 gem 'openssl'
 
 # Active Job Backend, alternative to sidekiq (https://github.com/bensheldon/good_job)
-gem 'good_job'
+gem 'good_job', ">= 4.1.1"
 
 # Action Cable backend using DB (https://github.com/rails/solid_cable)
 gem 'solid_cable'
@@ -97,6 +100,8 @@ gem 'solid_cable'
 gem 'faraday'
 # > Multipart requests - used primarly for files (https://github.com/lostisland/faraday-multipart)
 gem 'faraday-multipart'
+# > Parallel requests (https://github.com/typhoeus/typhoeus)
+gem 'typhoeus'
 
 # Base Rails Cache (https://github.com/rails/solid_cache)
 gem 'solid_cache'
