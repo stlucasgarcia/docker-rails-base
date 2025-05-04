@@ -130,7 +130,7 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    honeybadger (5.27.4)
+    honeybadger (5.28.0)
       logger
       ostruct
     http-accept (1.7.0)
