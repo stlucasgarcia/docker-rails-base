@@ -1,5 +1,7 @@
-# syntax = docker/dockerfile:1
-FROM ruby:3.4.4-alpine
+# syntax=docker/dockerfile:1
+# check=error=true
+
+FROM ruby:3.4.7-alpine
 LABEL maintainer="lucas@stlucasgarcia.com"
 
 # Add basic packages
@@ -14,16 +16,14 @@ RUN apk add --no-cache \
       xz-libs
 
 # Configure Rails
-ENV RAILS_LOG_TO_STDOUT=true
 # ENV RAILS_SERVE_STATIC_FILES=true
+ENV RAILS_LOG_TO_STDOUT=true \
+      RAILS_ENV=production
 
 WORKDIR /app
 
 # Expose Puma port
 EXPOSE 3000
-
-# This image is for production env only
-ENV RAILS_ENV production
 
 # Enable jemalloc for reduced memory usage and latency
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2

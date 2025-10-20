@@ -131,7 +131,7 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    honeybadger (5.29.1)
+    honeybadger (6.1.2)
       logger
       ostruct
     http-accept (1.7.0)
@@ -166,7 +166,6 @@ GEM
       net-pop
       net-smtp
     marcel (1.1.0)
-    method_source (1.1.0)
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
@@ -210,7 +209,7 @@ GEM
     oj (3.16.11)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
-    openssl (3.3.0)
+    openssl (3.3.1)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
     pagy (9.4.0)
@@ -364,10 +363,9 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.0.4)
     useragent (0.16.11)
-    view_component (3.23.2)
-      activesupport (>= 5.2.0, < 8.1)
+    view_component (4.0.2)
+      activesupport (>= 7.1.0, < 8.1)
       concurrent-ruby (~> 1)
-      method_source (~> 1.0)
     vite_rails (3.0.19)
       railties (>= 5.1, < 9)
       vite_ruby (~> 3.0, >= 3.2.2)
@@ -417,7 +415,7 @@ DEPENDENCIES
   rack-brotli
   rack-canonical-host
   rack-cors
-  rails (~> 8.0.2)
+  rails (~> 8.0.3)
   redcarpet
   rest-client
   sass-rails (>= 6)
@@ -433,7 +431,7 @@ DEPENDENCIES
   vite_rails
 
 RUBY VERSION
-   ruby 3.4.4p34
+   ruby 3.4.7p58
 
 BUNDLED WITH
-   2.6.9
+   2.7.2
