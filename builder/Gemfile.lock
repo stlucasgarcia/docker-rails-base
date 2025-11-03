@@ -178,7 +178,7 @@ GEM
     msgpack (1.8.0)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
-    net-http (0.6.0)
+    net-http (0.7.0)
       uri
     net-imap (0.5.12)
       date
@@ -362,7 +362,7 @@ GEM
       ethon (>= 0.9.0, < 0.16.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (1.0.4)
+    uri (1.1.0)
     useragent (0.16.11)
     view_component (4.1.0)
       activesupport (>= 7.1.0, < 8.2)
