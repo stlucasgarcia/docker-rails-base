@@ -97,7 +97,7 @@ GEM
     dry-cli (1.4.1)
     erb (6.0.6)
     erubi (1.13.1)
-    et-orbi (1.4.0)
+    et-orbi (1.4.1)
       tzinfo
     ethon (0.18.0)
       ffi (>= 1.15.0)
